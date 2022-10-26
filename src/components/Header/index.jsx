@@ -4,7 +4,7 @@ import './index.css'
 
 function Header() {
   return (
-    <header className="header">
+    <header>
       <nav className="main-nav">
         <NavLink to="/" className="main-nav-logo">
           <img
