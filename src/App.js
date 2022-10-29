@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Error from './pages/Error'
 import Footer from './components/Footer'
 import SignIn from './pages/SignIn'
-import User from './pages/User'
+import User from './pages/Profile'
 
 function App() {
   return (

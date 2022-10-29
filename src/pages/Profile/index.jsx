@@ -1,12 +1,27 @@
+import { Navigate } from 'react-router-dom'
 import Account from '../../components/Account'
 import Greeting from '../../components/Greeting'
+import { useSelector } from 'react-redux'
+import {
+  selectUserFirstName,
+  selectUserIsConnected,
+  selectUserLastName,
+} from '../../app/selectors'
 import './index.css'
 
 function User() {
+  const userFirstName = useSelector(selectUserFirstName())
+  const userLastName = useSelector(selectUserLastName())
+  const userIsConnected = useSelector(selectUserIsConnected())
+
+  if (!userIsConnected) {
+    return <Navigate to="/login" replace />
+  }
+
   return (
     <main className="main bg-dark">
       <div className="header">
-        <Greeting firstName="Tony" lastName="Jarvis" />
+        <Greeting firstName={userFirstName} lastName={userLastName} />
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>
