@@ -13,3 +13,7 @@ export const selectUserFirstName = () => {
 export const selectUserLastName = () => {
   return (state) => state.userData.lastName
 }
+
+export const selectUserError = () => {
+  return (state) => state.userData.error
+}

@@ -1,9 +1,11 @@
 import { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { triggerLogin } from '../../features/userSlice'
+import { selectUserError } from '../../app/selectors'
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const userLoginError = useSelector(selectUserError())
   const inputUsername = useRef()
   const inputPassword = useRef()
   const checkboxRemember = useRef()
@@ -22,11 +24,11 @@ function LoginForm() {
     <form onSubmit={(e) => handleSubmit(e)}>
       <div className="input-wrapper">
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" ref={inputUsername} />
+        <input type="text" id="username" ref={inputUsername} required />
       </div>
       <div className="input-wrapper">
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" ref={inputPassword} />
+        <input type="password" id="password" ref={inputPassword} required />
       </div>
       <div className="input-remember">
         <input type="checkbox" id="remember-me" ref={checkboxRemember} />
@@ -35,6 +37,11 @@ function LoginForm() {
       <button type="submit" className="sign-in-button">
         Sign In
       </button>
+      {userLoginError !== null ? (
+        <p style={{ color: 'red', marginBottom: 0 }}>
+          Error : Username or password
+        </p>
+      ) : null}
     </form>
   )
 }
