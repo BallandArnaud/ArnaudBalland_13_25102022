@@ -6,10 +6,29 @@ export function triggerLogin(login, password) {
   return async (dispatch) => {
     const authService = new AuthService()
     const token = await authService.loginUser(login, password)
-    dispatch(userLogin(token))
+    dispatch(loginSuccess(token))
     const userService = new UserService()
     const userInformations = await userService.getUserProfile(token)
-    dispatch(setUserProfile(userInformations))
+    dispatch(setProfile(userInformations))
+  }
+}
+
+export function triggerUpdateProfile(firstName, lastName) {
+  return async (dispatch, getState) => {
+    const token = getState().userData.token
+    console.log('TriggerUpdateProfile get token : ', token)
+    const userService = new UserService()
+    const newUserInformations = await userService.updateUserProfile(
+      token,
+      firstName,
+      lastName
+    )
+    console.log('new user infos', newUserInformations)
+    const userInformations = {
+      firstName: firstName,
+      lastName: lastName,
+    }
+    dispatch(setProfile(userInformations))
   }
 }
 
@@ -18,26 +37,32 @@ const initialState = () => {
     firstName: null,
     lastName: null,
     token: null,
+    error: null,
   }
 }
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: initialState(),
   reducers: {
-    setUserProfile: (state, action) => {
+    setProfile: (state, action) => {
       console.log(action.payload)
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
     },
-    userLogin: (state, action) => {
+    loginSuccess: (state, action) => {
       state.token = action.payload
+      state.error = null
     },
-    userLogout: (state, action) => {
+    loginFailure: (state, action) => {
+      state.error = action.payload
+    },
+    logout: (state, action) => {
       return initialState()
     },
   },
 })
 
-export const { setUserProfile, userLogin, userLogout } = userSlice.actions
+export const { setProfile, loginSuccess, loginFailure, logout } =
+  userSlice.actions
 export default userSlice.reducer

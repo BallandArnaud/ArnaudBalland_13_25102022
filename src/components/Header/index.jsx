@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import logo from '../../assets/argentBankLogo.png'
 import './index.css'
-import { userLogout } from '../../features/userSlice'
+import { logout } from '../../features/userSlice'
 import { selectUserIsConnected, selectUserFirstName } from '../../app/selectors'
 
 function Header() {
@@ -31,7 +31,7 @@ function Header() {
               <NavLink
                 to="/"
                 className="main-nav-item"
-                onClick={() => dispatch(userLogout())}
+                onClick={() => dispatch(logout())}
               >
                 <i className="fa fa-sign-out"></i>
                 Sign Out

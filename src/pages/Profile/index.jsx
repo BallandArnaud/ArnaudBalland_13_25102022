@@ -1,18 +1,43 @@
 import { Navigate } from 'react-router-dom'
 import Account from '../../components/Account'
 import Greeting from '../../components/Greeting'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   selectUserFirstName,
   selectUserIsConnected,
   selectUserLastName,
 } from '../../app/selectors'
+import { useState, useRef } from 'react'
 import './index.css'
+import { triggerUpdateProfile } from '../../features/userSlice'
 
 function User() {
+  const dispatch = useDispatch()
   const userFirstName = useSelector(selectUserFirstName())
   const userLastName = useSelector(selectUserLastName())
   const userIsConnected = useSelector(selectUserIsConnected())
+  const [isEditing, setIsEditing] = useState(false)
+  const inputFirstName = useRef()
+  const inputLastName = useRef()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log('formulaire edit envoyé')
+    console.log('Nouveau firstName', inputFirstName.current.value)
+    console.log('Nouveau lastName', inputLastName.current.value)
+    dispatch(
+      triggerUpdateProfile(
+        inputFirstName.current.value,
+        inputLastName.current.value
+      )
+    )
+    setIsEditing(false)
+  }
+
+  const displayEditForm = (e) => {
+    e.preventDefault()
+    setIsEditing(true)
+  }
 
   if (!userIsConnected) {
     return <Navigate to="/login" replace />
@@ -22,7 +47,29 @@ function User() {
     <main className="main bg-dark">
       <div className="header">
         <Greeting firstName={userFirstName} lastName={userLastName} />
-        <button className="edit-button">Edit Name</button>
+        <button className="edit-button" onClick={(e) => displayEditForm(e)}>
+          Edit Name
+        </button>
+        {isEditing ? (
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <label htmlFor="firstName">Username</label>
+            <input
+              type="text"
+              id="firstName"
+              ref={inputFirstName}
+              defaultValue={userFirstName}
+            />
+            <label htmlFor="lastName">Username</label>
+            <input
+              type="text"
+              id="lastName"
+              ref={inputLastName}
+              defaultValue={userLastName}
+            />
+            <button type="submit">Modify</button>
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
+          </form>
+        ) : null}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account
