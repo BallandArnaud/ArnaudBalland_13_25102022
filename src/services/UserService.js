@@ -45,7 +45,7 @@ export default class UserService {
       .then((data) => data.body)
       .catch((error) => error)
 
-    console.log('User profile :', updateUserProfile)
+    console.log('User profile updated :', updateUserProfile)
     return updateUserProfile
   }
 }

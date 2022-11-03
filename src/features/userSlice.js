@@ -4,12 +4,16 @@ import UserService from '../services/UserService'
 
 export function triggerLogin(login, password) {
   return async (dispatch) => {
-    const authService = new AuthService()
-    const token = await authService.loginUser(login, password)
-    dispatch(loginSuccess(token))
-    const userService = new UserService()
-    const userInformations = await userService.getUserProfile(token)
-    dispatch(setProfile(userInformations))
+    try {
+      const authService = new AuthService()
+      const token = await authService.loginUser(login, password)
+      dispatch(loginSuccess(token))
+      const userService = new UserService()
+      const userInformations = await userService.getUserProfile(token)
+      dispatch(setProfile(userInformations))
+    } catch (error) {
+      dispatch(loginFailure(error))
+    }
   }
 }
 
@@ -46,7 +50,6 @@ const userSlice = createSlice({
   initialState: initialState(),
   reducers: {
     setProfile: (state, action) => {
-      console.log(action.payload)
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
     },
