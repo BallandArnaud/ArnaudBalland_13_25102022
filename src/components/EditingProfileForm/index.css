@@ -1,0 +1,74 @@
+.editing-profile-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 20px;
+  width: 80%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.editing-profile-form label {
+  color: #fff;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.editing-profile-form input {
+  padding: 5px;
+  flex: 1;
+}
+
+.btn{
+  font-weight: bold;
+  padding: 5px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-modify {
+  color: #fff;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  margin-bottom: 10px;
+}
+
+.btn-modify:hover {
+  border-color: #00a86b;
+  background-color: #00a86b;
+}
+
+.btn-cancel {
+  border-color: #e63946;
+  background-color: #e63946;
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  border-color: #e42836;
+  background-color: #e42836;
+}
+
+@media (min-width: 790px) {
+  .editing-profile-form {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
+  .btn-modify {
+    margin: 0 10px 0 0;
+  }
+}
