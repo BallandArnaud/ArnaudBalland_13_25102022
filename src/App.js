@@ -4,7 +4,8 @@ import Home from './pages/Home'
 import Error from './pages/Error'
 import Footer from './components/Footer'
 import SignIn from './pages/SignIn'
-import User from './pages/Profile'
+import Profile from './pages/Profile'
+import ProtectedRoutes from './components/ProtectedRoutes'
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
-          <Route path="/profile" element={<User />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

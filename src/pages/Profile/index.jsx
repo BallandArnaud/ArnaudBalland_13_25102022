@@ -1,21 +1,15 @@
-import { Navigate } from 'react-router-dom'
 import Account from '../../components/Account'
 import Greeting from '../../components/Greeting'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  selectUserFirstName,
-  selectUserIsConnected,
-  selectUserLastName,
-} from '../../app/selectors'
+import { selectUserFirstName, selectUserLastName } from '../../app/selectors'
 import { useState, useRef } from 'react'
 import './index.css'
 import { triggerUpdateProfile } from '../../features/userSlice'
 
-function User() {
+function Profile() {
   const dispatch = useDispatch()
   const userFirstName = useSelector(selectUserFirstName())
   const userLastName = useSelector(selectUserLastName())
-  const userIsConnected = useSelector(selectUserIsConnected())
   const [isEditing, setIsEditing] = useState(false)
   const inputFirstName = useRef()
   const inputLastName = useRef()
@@ -37,10 +31,6 @@ function User() {
   const displayEditForm = (e) => {
     e.preventDefault()
     setIsEditing(true)
-  }
-
-  if (!userIsConnected) {
-    return <Navigate to="/login" replace />
   }
 
   return (
@@ -91,4 +81,4 @@ function User() {
   )
 }
 
-export default User
+export default Profile
