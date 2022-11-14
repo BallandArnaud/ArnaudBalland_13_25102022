@@ -32,7 +32,7 @@ export default class AuthService {
       return userConnexion.token
     } catch (error) {
       console.log(error)
-      return Promise.reject('Login error')
+      return Promise.reject("Server error : can't login")
     }
   }
 }

@@ -2,12 +2,17 @@ import { createSlice } from '@reduxjs/toolkit'
 import AuthService from '../services/AuthService'
 import UserService from '../services/UserService'
 
-export function triggerLogin(login, password) {
+export function triggerLogin(login, password, rememberMe) {
   return async (dispatch) => {
     try {
       const authService = new AuthService()
       const token = await authService.loginUser(login, password)
-      dispatch(loginSuccess(token))
+      dispatch(
+        loginSuccess({
+          token: token,
+          rememberMe: rememberMe,
+        })
+      )
       const userService = new UserService()
       const userInformations = await userService.getUserProfile(token)
       dispatch(setProfile(userInformations))
@@ -54,13 +59,17 @@ const userSlice = createSlice({
       state.lastName = action.payload.lastName
     },
     loginSuccess: (state, action) => {
-      state.token = action.payload
+      state.token = action.payload.token
       state.error = null
+      if (action.payload.rememberMe) {
+        localStorage.setItem('token', state.token)
+      }
     },
     loginFailure: (state, action) => {
       state.error = action.payload
     },
     logout: (state, action) => {
+      localStorage.clear()
       return initialState()
     },
   },

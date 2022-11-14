@@ -16,7 +16,11 @@ function LoginForm() {
     console.log('Checkbox est check ? ', checkboxRemember.current.checked)
 
     dispatch(
-      triggerLogin(inputUsername.current.value, inputPassword.current.value)
+      triggerLogin(
+        inputUsername.current.value,
+        inputPassword.current.value,
+        checkboxRemember.current.checked
+      )
     )
   }
 
