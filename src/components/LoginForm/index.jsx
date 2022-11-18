@@ -12,9 +12,6 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('formulaire envoyé')
-    console.log('Checkbox est check ? ', checkboxRemember.current.checked)
-
     dispatch(
       triggerLogin(
         inputUsername.current.value,

@@ -13,9 +13,6 @@ function EditingProfileForm({ setIsEditing }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('formulaire edit envoyé')
-    console.log('Nouveau firstName', inputFirstName.current.value)
-    console.log('Nouveau lastName', inputLastName.current.value)
     dispatch(
       triggerUpdateProfile(
         inputFirstName.current.value,
@@ -45,8 +42,8 @@ function EditingProfileForm({ setIsEditing }) {
           defaultValue={userLastName}
         />
       </div>
-      <button className="btn btn-modify" type="submit">
-        Modify
+      <button className="btn btn-save" type="submit">
+        Save
       </button>
       <button className="btn btn-cancel" onClick={() => setIsEditing(false)}>
         Cancel

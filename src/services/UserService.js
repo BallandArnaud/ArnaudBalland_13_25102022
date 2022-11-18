@@ -26,8 +26,6 @@ export default class UserService {
         })
         .then((data) => data.body)
         .catch((error) => error)
-
-      console.log('User profile :', getUserProfile)
       return getUserProfile
     } catch (error) {
       console.log(error)
@@ -60,8 +58,6 @@ export default class UserService {
         })
         .then((data) => data.body)
         .catch((error) => error)
-
-      console.log('User profile updated :', updateUserProfile)
       return updateUserProfile
     } catch (error) {
       console.log(error)

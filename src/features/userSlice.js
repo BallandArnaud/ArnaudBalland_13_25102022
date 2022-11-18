@@ -25,19 +25,19 @@ export function triggerLogin(login, password, rememberMe) {
 export function triggerUpdateProfile(firstName, lastName) {
   return async (dispatch, getState) => {
     const token = getState().userData.token
-    console.log('TriggerUpdateProfile get token : ', token)
     const userService = new UserService()
     const newUserInformations = await userService.updateUserProfile(
       token,
       firstName,
       lastName
     )
-    console.log('new user infos', newUserInformations)
-    const userInformations = {
-      firstName: firstName,
-      lastName: lastName,
-    }
-    dispatch(setProfile(userInformations))
+    console.log(newUserInformations)
+    dispatch(
+      setProfile({
+        firstName: firstName,
+        lastName: lastName,
+      })
+    )
   }
 }
 

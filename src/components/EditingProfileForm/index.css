@@ -34,14 +34,14 @@
   cursor: pointer;
 }
 
-.btn-modify {
+.btn-save {
   color: #fff;
   border-color: #00bc77;
   background-color: #00bc77;
   margin-bottom: 10px;
 }
 
-.btn-modify:hover {
+.btn-save:hover {
   border-color: #00a86b;
   background-color: #00a86b;
 }
@@ -68,7 +68,7 @@
     margin-right: 10px;
   }
 
-  .btn-modify {
+  .btn-save {
     margin: 0 10px 0 0;
   }
 }

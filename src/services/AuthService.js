@@ -21,7 +21,6 @@ export default class AuthService {
         requestOptions
       )
         .then((response) => {
-          console.log({ response })
           if (!response.ok) {
             throw new Error('Login failed')
           }
